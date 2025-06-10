@@ -1,9 +1,12 @@
 package de.ordermatching
 
+import de.ordermatching.distance.DefaultCWPriceEstimator
+import de.ordermatching.distance.PriceEstimator
+
 data class Configuration(
     val startTpAmountLimit: Int = 5,
     val pickupTimeMinutes: Int = 15,
-    val crowdworkerPayment: Double = 1.0,
-    val pickupDistance: Double = 0.1
+    val pickupDistance: Double = 0.1,
+    val cwPriceEstimator: PriceEstimator = DefaultCWPriceEstimator()
 ) {
 }
