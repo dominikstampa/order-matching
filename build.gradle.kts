@@ -20,7 +20,7 @@ dependencies {
     implementation("org.geotools:gt-main:29.1")
     implementation("org.locationtech.jts:jts-core:1.19.0")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("ch.qos.logback:logback-classic:1.5.13")
 }
 
 tasks.test {
