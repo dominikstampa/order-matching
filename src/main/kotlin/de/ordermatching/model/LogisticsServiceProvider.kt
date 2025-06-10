@@ -1,6 +1,5 @@
 package de.ordermatching.model
 
-import de.ordermatching.distance.PriceEstimator
 import org.locationtech.jts.geom.Polygon
 
 data class LogisticsServiceProvider(
