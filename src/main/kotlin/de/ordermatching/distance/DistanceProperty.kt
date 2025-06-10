@@ -34,8 +34,7 @@ interface DistanceProperty {
         to: Node,
         arrivalTime: OffsetDateTime,
         emissions: Double,
-        price: Double,
-        lsp: LogisticsServiceProvider?
+        price: Double
     ): Boolean
 
     //distance object if more properties
@@ -48,7 +47,7 @@ interface DistanceProperty {
         lsp: LogisticsServiceProvider?
     ) {
         require(arrivalTime.hour != 0 || arrivalTime.minute != 0)
-        if (needsUpdate(from, to, arrivalTime, emissions, price, lsp) && !isLongDistanceViolation(from, to)) {
+        if (needsUpdate(from, to, arrivalTime, emissions, price) && !isLongDistanceViolation(from, to)) {
             val estimatedEmissions = estimateEmissions(from.position, to.position, emissions)
             to.arrivalTime = arrivalTime.withOffsetSameInstant(ZoneOffset.UTC)
             to.emissions = from.emissions!! + estimatedEmissions

@@ -134,8 +134,7 @@ internal class EmissionPropertyTest {
                 nodeTwo,
                 arrivalTime.minusDays(1),
                 emissions = 1.0,
-                price = 1.0,
-                lsp = null
+                price = 1.0
             )
         )
     }
@@ -148,8 +147,7 @@ internal class EmissionPropertyTest {
                 nodeTwo,
                 arrivalTime.plusDays(1),
                 emissions = 20.0,
-                price = 1.0,
-                lsp = null
+                price = 1.0
             )
         )
     }

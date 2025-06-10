@@ -67,7 +67,7 @@ internal class DistancePropertyTest {
         every { distanceProperty.initDistance(any(), any(), any()) } answers { callOriginal() }
         every { distanceProperty.estimateEmissions(any(), any(), any()) } answers { callOriginal() }
         every { distanceProperty.updateDistance(any(), any(), any(), any(), any(), any()) } answers { callOriginal() }
-        every { distanceProperty.needsUpdate(any(), any(), any(), any(), any(), any()) } returns true
+        every { distanceProperty.needsUpdate(any(), any(), any(), any(), any()) } returns true
         every { distanceProperty.ignoreLongDistance } returns false
     }
 

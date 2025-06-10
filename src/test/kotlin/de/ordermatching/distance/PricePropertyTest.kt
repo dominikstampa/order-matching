@@ -43,13 +43,13 @@ internal class PricePropertyTest {
 
     @Test
     fun `test needs update`() {
-        assert(priceProperty.needsUpdate(nodeOne, nodeTwo, arrivalTime.plusDays(1), 2.0, 2.0, null))
+        assert(priceProperty.needsUpdate(nodeOne, nodeTwo, arrivalTime.plusDays(1), 2.0, 2.0))
     }
 
     @Test
     fun `test needs update with to node null`() {
         nodeTwo.price = null
-        assert(priceProperty.needsUpdate(nodeOne, nodeTwo, arrivalTime.plusDays(1), 2.0, 2.0, null))
+        assert(priceProperty.needsUpdate(nodeOne, nodeTwo, arrivalTime.plusDays(1), 2.0, 2.0))
     }
 
     @Test

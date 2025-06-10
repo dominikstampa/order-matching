@@ -21,8 +21,7 @@ class EmissionProperty(override val ignoreLongDistance: Boolean = true) : Distan
         to: Node,
         arrivalTime: OffsetDateTime,
         emissions: Double,
-        price: Double,
-        lsp: LogisticsServiceProvider?
+        price: Double
     ): Boolean {
         val estimatedEmissions = estimateEmissions(from.position, to.position, emissions)
         return to.emissions == null || from.emissions!! + estimatedEmissions < to.emissions!!

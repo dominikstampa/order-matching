@@ -21,8 +21,7 @@ class PriceProperty(override val ignoreLongDistance: Boolean = true) : DistanceP
         to: Node,
         arrivalTime: OffsetDateTime,
         emissions: Double,
-        price: Double,
-        lsp: LogisticsServiceProvider?
+        price: Double
     ): Boolean {
         return to.price == null || to.price!! > from.price!! + price
     }

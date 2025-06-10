@@ -22,8 +22,7 @@ class TimeProperty(override val ignoreLongDistance: Boolean = true) : DistancePr
         to: Node,
         arrivalTime: OffsetDateTime,
         emissions: Double,
-        price: Double,
-        lsp: LogisticsServiceProvider?
+        price: Double
     ): Boolean {
         return to.arrivalTime == null || arrivalTime.isBefore(to.arrivalTime)
     }

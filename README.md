@@ -12,6 +12,7 @@ step.
 To build the project: `./gradlew build`
 
 To publish the built jar to the local maven repository `./gradlew publishToMavenLocal`
+For a new version change the version number in build.gradle.kts at the top and in the publishing section
 
 ## Description of the Model
 
