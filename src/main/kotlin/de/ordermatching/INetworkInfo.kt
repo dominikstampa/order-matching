@@ -39,10 +39,10 @@ interface INetworkInfo {
 
     /**
      * Should return general service information (estimated delivery time, emissions ...)
-     * of the parcel service given the potential start time and package size of a transport
+     * of the parcel service given the potential start time, start and end position and package size of a transport
      */
     fun getServiceInfo(
-        parcelService: LogisticsServiceProvider, startTime: OffsetDateTime, packageSize: PackageSize
+        parcelService: LogisticsServiceProvider, startTime: OffsetDateTime, packageSize: PackageSize, startPosition: GeoPosition, endPosition: GeoPosition,
     ): ServiceInfo
 
     /**

@@ -100,12 +100,9 @@ class DefaultPlanningCalculator : IPlanningCalculator {
             relevantNodes.add(input.endNode)
         }
         if (relevantNodes.isNotEmpty()) {
-            val serviceInfo =
-                input.networkInfo.getServiceInfo(lsp, getEarliestPickupTime(node), input.order.packageSize)
             updateNodes(
                 relevantNodes,
                 lsp,
-                serviceInfo,
                 node
             ) //do not consider opening times for parcel service, so they can deliver e.g. day before. Change maybe
         }
@@ -150,10 +147,12 @@ class DefaultPlanningCalculator : IPlanningCalculator {
     private fun updateNodes(
         nodes: List<Node>,
         parcelService: LogisticsServiceProvider,
-        lspServiceInfo: ServiceInfo,
         start: Node
     ) {
+        val startTime = getEarliestPickupTime(start)
         nodes.forEach() {
+            val lspServiceInfo = input.networkInfo.getServiceInfo(parcelService, startTime, input.order.packageSize, start.position, it.position)
+            //getting serviceInfo for each node might lead to performance issues?
             input.distanceProperty.updateDistance(
                 start,
                 it,
@@ -173,8 +172,6 @@ class DefaultPlanningCalculator : IPlanningCalculator {
         val parcelService = node.lspOwner
 
         if (!parcelService.externalInteraction) {
-            val serviceInfo =
-                input.networkInfo.getServiceInfo(parcelService, getEarliestPickupTime(node), input.order.packageSize)
             //only IN nodes of this parcel service relevant
             val nodes =
                 priorityQueue.filter { it.lspOwner == parcelService && it.type == NodeType.IN }
@@ -182,7 +179,7 @@ class DefaultPlanningCalculator : IPlanningCalculator {
             if (isEndInDeliveryRegion(parcelService.deliveryRegion)) {
                 nodes.add(input.allNodes.first())
             }
-            updateNodes(nodes, parcelService, serviceInfo, node)
+            updateNodes(nodes, parcelService, node)
         } else {
             //like other nodes
             findAndUpdateNodesForParcelService(parcelService, node)

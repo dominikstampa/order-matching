@@ -75,7 +75,7 @@ internal class DefaultPlanningCalculatorLongDistanceTest {
         every { networkInfo.findLSPsWithPositionInDeliveryRegion(secondNode.position) } returns listOf(testLsp)
         every { networkInfo.findLSPsWithPositionInDeliveryRegion(thirdNode.position) } returns listOf(testLsp) //add another?
         every { networkInfo.findTransferPointsInLSPDeliveryRegion(testLsp) } returns allTps
-        every { networkInfo.getServiceInfo(testLsp, any(), distantOrder.packageSize) } returns serviceInfo
+        every { networkInfo.getServiceInfo(testLsp, any(), distantOrder.packageSize, any(), any()) } returns serviceInfo
         every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
         every { networkInfo.findSuitedCWRoutesNearPosition(secondNode.position, any()) } returns listOf(routeTimeslot)
         every {

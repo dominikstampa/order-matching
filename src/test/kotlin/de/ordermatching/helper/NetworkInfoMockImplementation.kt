@@ -38,7 +38,9 @@ class NetworkInfoMockImplementation : AbstractNetworkInfo() {
     override fun getServiceInfo(
         parcelService: LogisticsServiceProvider,
         startTime: OffsetDateTime,
-        packageSize: PackageSize
+        packageSize: PackageSize,
+        startPosition: GeoPosition,
+        endPosition: GeoPosition,
     ): ServiceInfo {
         return ServiceInfo(
             priceEstimate = 2.0,

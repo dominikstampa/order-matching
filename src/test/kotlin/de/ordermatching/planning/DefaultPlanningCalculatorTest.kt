@@ -73,7 +73,7 @@ internal open class DefaultPlanningCalculatorTest {
         every { networkInfo.findLSPsWithPositionInDeliveryRegion(any()) } returns listOf(testLsp)
         every { networkInfo.findTransferPointsInLSPDeliveryRegion(any()) } returns listOf(mockTp)
         every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
-        every { networkInfo.getServiceInfo(testLsp, any(), testOrder.packageSize) } returns serviceInfo
+        every { networkInfo.getServiceInfo(testLsp, any(), testOrder.packageSize, any(), any()) } returns serviceInfo
 
         calculator.calculate(input)
 
@@ -87,8 +87,8 @@ internal open class DefaultPlanningCalculatorTest {
         every { networkInfo.findLSPsWithPositionInDeliveryRegion(any()) } returns listOf(testLsp)
         every { networkInfo.findTransferPointsInLSPDeliveryRegion(any()) } returns listOf(mockTp)
         every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
-        every { networkInfo.getServiceInfo(testLsp, any(), testOrder.packageSize) } returns serviceInfo
-        every { networkInfo.getServiceInfo(slowLsp, any(), testOrder.packageSize) } returns slowServiceInfo
+        every { networkInfo.getServiceInfo(testLsp, any(), testOrder.packageSize, any(), any()) } returns serviceInfo
+        every { networkInfo.getServiceInfo(slowLsp, any(), testOrder.packageSize, any(), any()) } returns slowServiceInfo
 
         calculator.calculate(input)
 
@@ -170,7 +170,7 @@ internal open class DefaultPlanningCalculatorTest {
 
             calculator.calculate(timesInput)
 
-            verify { networkInfo.getServiceInfo(endLsp, testOrder.startTime.plusHours(26), testOrder.packageSize) }
+            verify { networkInfo.getServiceInfo(endLsp, testOrder.startTime.plusHours(26), testOrder.packageSize, any(), any()) }
             assert(endNode.arrivalTime != null)
         }
 
@@ -189,7 +189,9 @@ internal open class DefaultPlanningCalculatorTest {
                 networkInfo.getServiceInfo(
                     startLsp,
                     startNode.arrivalTime!!,
-                    testOrder.packageSize
+                    testOrder.packageSize,
+                    any(),
+                    any()
                 )
             } returns serviceInfo
             every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
@@ -197,7 +199,9 @@ internal open class DefaultPlanningCalculatorTest {
                 networkInfo.getServiceInfo(
                     endLsp,
                     serviceInfo.deliveryDateEstimate.plusHours(2),
-                    testOrder.packageSize
+                    testOrder.packageSize,
+                    any(),
+                    any()
                 )
             } returns endLspServiceInfo
         }
@@ -236,14 +240,18 @@ internal open class DefaultPlanningCalculatorTest {
                 networkInfo.getServiceInfo(
                     testLsp,
                     testOrder.startTime,
-                    testOrder.packageSize
+                    testOrder.packageSize,
+                    any(),
+                    any()
                 )
             } returns serviceInfo
             every {
                 networkInfo.getServiceInfo(
                     cheapLsp,
                     testOrder.startTime,
-                    testOrder.packageSize
+                    testOrder.packageSize,
+                    any(),
+                    any()
                 )
             } returns cheapInfo
             every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
@@ -261,7 +269,9 @@ internal open class DefaultPlanningCalculatorTest {
                 networkInfo.getServiceInfo(
                     cheapLsp,
                     testOrder.startTime,
-                    testOrder.packageSize
+                    testOrder.packageSize,
+                    any(),
+                    any()
                 )
             } returns cheapInfo
             every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()

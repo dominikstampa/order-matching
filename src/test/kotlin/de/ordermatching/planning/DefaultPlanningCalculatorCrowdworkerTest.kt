@@ -91,7 +91,7 @@ internal class DefaultPlanningCalculatorCrowdworkerTest {
             midTp
         )
         every { networkInfo.findTransferPointsInLSPDeliveryRegion(lastMileLsp) } returns listOf(midTp)
-        every { networkInfo.getServiceInfo(lastMileLsp, any(), any()) } returns serviceInfo
+        every { networkInfo.getServiceInfo(lastMileLsp, any(), any(), any(), any()) } returns serviceInfo
 
         planner.calculate(input)
 

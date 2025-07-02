@@ -57,7 +57,7 @@ internal class TransportPlanningTest {
         every { networkInfo.getAllTransferPoints() } returns listOf(transferPoint)
         every { networkInfo.findLSPsWithPositionInDeliveryRegion(transferPoint.position) } returns listOf(testLsp)
         every { networkInfo.findTransferPointsInLSPDeliveryRegion(testLsp) } returns listOf(transferPoint)
-        every { networkInfo.getServiceInfo(testLsp, any(), any()) } returns serviceInfo
+        every { networkInfo.getServiceInfo(testLsp, any(), any(), any(), any()) } returns serviceInfo
         every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
     }
 
