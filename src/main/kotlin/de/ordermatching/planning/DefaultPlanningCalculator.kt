@@ -81,7 +81,9 @@ class DefaultPlanningCalculator : IPlanningCalculator {
             parcelServices.map { parcelService ->
                 findAndUpdateNodesForParcelService(parcelService, node)
             }
-            processPossibleCWEdges(node)
+            if (input.config.mixingAllowed) {
+                processPossibleCWEdges(node)
+            }
         }
     }
 
@@ -191,11 +193,28 @@ class DefaultPlanningCalculator : IPlanningCalculator {
             logger.info { "Set self pickup at node $node" }
             selfPickup(node)
         } else {
+            if (input.config.mixingAllowed) {
+                val parcelServices =
+                    input.networkInfo.findLSPsWithPositionInDeliveryRegion(node.position)
+                        .filter { it.externalInteraction }
+                parcelServices.forEach {
+                    findAndUpdateNodesForParcelService(it, node)
+                }
+                processPossibleCWEdges(node)
+            } else {
+                processNeutralNodeWithoutMixing(node)
+            }
+        }
+    }
+
+    private fun processNeutralNodeWithoutMixing(node: Node) {
+        if (node.lspToNode != null) {
             val parcelServices =
                 input.networkInfo.findLSPsWithPositionInDeliveryRegion(node.position).filter { it.externalInteraction }
             parcelServices.forEach {
                 findAndUpdateNodesForParcelService(it, node)
             }
+        } else {
             processPossibleCWEdges(node)
         }
     }
