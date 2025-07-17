@@ -193,7 +193,7 @@ class DefaultPlanningCalculator : IPlanningCalculator {
             logger.info { "Set self pickup at node $node" }
             selfPickup(node)
         } else {
-            if (input.config.mixingAllowed) {
+            if (input.config.mixingAllowed || node.predecessor == null) {
                 val parcelServices =
                     input.networkInfo.findLSPsWithPositionInDeliveryRegion(node.position)
                         .filter { it.externalInteraction }
