@@ -6,4 +6,7 @@ data class TransferPoint(
     val openingTimes: List<de.ordermatching.model.Timeslot> = emptyList(), //empty list means no opening time limitations (maybe to null instead)
     val type: TransferPointType = TransferPointType.LOCKER
 ) {
+    override fun toString(): String {
+        return "Node(position=$position, type=$type, owner=$owner)"
+    }
 }

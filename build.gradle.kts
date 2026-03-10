@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.ordermatching"
-version = "0.6.1"
+version = "0.6.2"
 
 repositories {
     maven {
@@ -40,7 +40,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "de.ordermatching"
             artifactId = "order-matching"
-            version = "0.6.1"
+            version = "0.6.2"
 
             from(components["java"])
         }

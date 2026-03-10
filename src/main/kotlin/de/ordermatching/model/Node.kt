@@ -14,4 +14,8 @@ data class Node(
     var price: Double? = null,
     var hasLongDistanceTransport: Boolean = false //TODO remove for package?
 ) {
+
+    override fun toString(): String {
+        return "Node(position=$position, type=$type, transferPoint=$transferPoint)"
+    }
 }
