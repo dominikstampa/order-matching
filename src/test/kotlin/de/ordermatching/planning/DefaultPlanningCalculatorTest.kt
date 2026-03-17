@@ -29,7 +29,7 @@ internal open class DefaultPlanningCalculatorTest {
 
     private val calculator = DefaultPlanningCalculator()
     private val endNode = getEndNode(testOrder)
-    private val mockTp = TransferPoint(GeoPosition(50.0, 10.0))
+    private val mockTp = TransferPoint(GeoPosition(50.0, 10.0), id = 0)
     private val startNode = Node(
         position = mockTp.position,
         transferPoint = mockTp,
@@ -109,7 +109,7 @@ internal open class DefaultPlanningCalculatorTest {
                     closeTime = "18:00"
                 )
             )
-        private val tpWithOpeningTimes = TransferPoint(position = GeoPosition(51.0, 11.0), openingTimes = openingTimes)
+        private val tpWithOpeningTimes = TransferPoint(position = GeoPosition(51.0, 11.0), openingTimes = openingTimes, id = 1)
         private val nodeWithOpeningTimes = Node(
             position = tpWithOpeningTimes.position,
             transferPoint = tpWithOpeningTimes,

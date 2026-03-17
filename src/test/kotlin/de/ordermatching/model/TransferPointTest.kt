@@ -22,7 +22,8 @@ class TransferPointTest {
             position = GeoPosition(1.0, 1.0),
             owner = serviceProvider,
             openingTimes = emptyList(),
-            type = TransferPointType.SHOP
+            type = TransferPointType.SHOP,
+            id = 0
         )
     }
 
@@ -32,23 +33,13 @@ class TransferPointTest {
     }
 
     @Test
-    fun `test transfer points not equal with other position`() {
+    fun `test transfer points not equal with other id`() {
         val other = TransferPoint(
             position = GeoPosition(1.1, 1.0),
             owner = serviceProvider,
             openingTimes = emptyList(),
-            type = TransferPointType.SHOP
-        )
-        assertNotEquals(tp, other)
-    }
-
-    @Test
-    fun `test transfer points not equal with other type`() {
-        val other = TransferPoint(
-            position = GeoPosition(1.0, 1.0),
-            owner = serviceProvider,
-            openingTimes = emptyList(),
-            type = TransferPointType.INTERNAL
+            type = TransferPointType.SHOP,
+            id = 1
         )
         assertNotEquals(tp, other)
     }
@@ -61,10 +52,11 @@ class TransferPointTest {
     @Test
     fun `test transfer points equal`() {
         val other = TransferPoint(
-            position = GeoPosition(1.0, 1.0),
+            position = GeoPosition(1.1, 1.0),
             owner = serviceProvider,
             openingTimes = emptyList(),
-            type = TransferPointType.SHOP
+            type = TransferPointType.INTERNAL,
+            id = 0
         )
         assertEquals(tp, other)
     }

@@ -37,7 +37,7 @@ internal class TransportPlanningPerformanceTest {
     private val testRectTopRight = GeoPosition(48.0, 7.0)
 
     private val allTps =
-        (1..numberTps).map { TransferPoint(getRandomPositionInRect(testRectBottomLeft, testRectTopRight)) }
+        (1..numberTps).mapIndexed { index, i -> TransferPoint(getRandomPositionInRect(testRectBottomLeft, testRectTopRight), id = index) }
 
     @BeforeEach
     fun setUp() {

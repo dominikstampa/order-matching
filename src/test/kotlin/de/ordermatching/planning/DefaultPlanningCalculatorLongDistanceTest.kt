@@ -31,13 +31,13 @@ internal class DefaultPlanningCalculatorLongDistanceTest {
     private val startNode = getStartNode(distantOrder)
     private val secondNode = Node(
         position = GeoPosition(45.0, 10.0),
-        transferPoint = TransferPoint(GeoPosition(45.0, 10.0)),
+        transferPoint = TransferPoint(GeoPosition(45.0, 10.0), id = 0),
         lspOwner = null,
         type = NodeType.NEUTRAL
     )
     private val thirdNode = Node(
         position = GeoPosition(45.1, 10.0),
-        transferPoint = TransferPoint(GeoPosition(45.1, 10.0)),
+        transferPoint = TransferPoint(GeoPosition(45.1, 10.0), id = 1),
         lspOwner = null,
         type = NodeType.NEUTRAL
     )

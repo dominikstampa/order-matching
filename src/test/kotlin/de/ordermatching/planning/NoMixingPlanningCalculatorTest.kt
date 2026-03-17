@@ -27,9 +27,9 @@ internal class NoMixingPlanningCalculatorTest {
 
     private val calculator = DefaultPlanningCalculator()
 //    private val calculator = NoMixingPlanningCalculator()
-    private val startTp = TransferPoint(testOrder.senderPosition)
-    private val midTp = TransferPoint(GeoPosition(50.0, 7.0))
-    private val endTp = TransferPoint(testOrder.recipientPosition)
+    private val startTp = TransferPoint(testOrder.senderPosition, id = 0)
+    private val midTp = TransferPoint(GeoPosition(50.0, 7.0), id = 1)
+    private val endTp = TransferPoint(testOrder.recipientPosition, id = 2)
     private val lastMileLsp = LogisticsServiceProvider(
         "lastMile",
         externalInteraction = true,

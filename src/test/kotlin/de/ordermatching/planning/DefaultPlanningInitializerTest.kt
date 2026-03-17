@@ -35,8 +35,8 @@ class DefaultPlanningInitializerTest {
     private val positionOne = GeoPosition(1.0, 1.0)
     private val planningInitializer = DefaultPlanningInitializer()
     private val transferPointList = listOf(
-        TransferPoint(positionZero),
-        TransferPoint(positionOne, lsp)
+        TransferPoint(positionZero, id = 0),
+        TransferPoint(positionOne, lsp, id = 1)
     )
     private val position = GeoPosition(0.0, 0.0)
     private val startNodes = listOf(
@@ -91,12 +91,14 @@ class DefaultPlanningInitializerTest {
             TransferPoint(
                 position = positionZero,
                 type = TransferPointType.INTERNAL,
-                owner = testLsp
+                owner = testLsp,
+                id = 0
             ),
             TransferPoint(
                 position = positionOne,
                 type = TransferPointType.SHOP,
-                owner = testLsp
+                owner = testLsp,
+                id = 1
             )
         )
         val result = planningInitializer.getAllNodes(networkInfo, emptyList())
@@ -110,12 +112,14 @@ class DefaultPlanningInitializerTest {
             TransferPoint(
                 position = positionZero,
                 type = TransferPointType.INTERNAL,
-                owner = testLsp
+                owner = testLsp,
+                id = 0
             ),
             TransferPoint(
                 position = positionOne,
                 type = TransferPointType.SHOP,
-                owner = testLsp
+                owner = testLsp,
+                id = 1
             )
         )
         val result = planningInitializer.getAllNodes(networkInfo, startNodes)

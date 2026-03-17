@@ -30,7 +30,7 @@ internal class TransportPlanningTest {
     private val resultGenerator = DefaultPlanningResultGenerator()
     private val planningCalculator = DefaultPlanningCalculator()
 
-    private val transferPoint = TransferPoint(GeoPosition(50.0, 10.0))
+    private val transferPoint = TransferPoint(GeoPosition(50.0, 10.0), id = 0)
     private val serviceInfo = ServiceInfo(
         priceEstimate = 3.0,
         deliveryDateEstimate = testOrder.startTime.plusDays(1),

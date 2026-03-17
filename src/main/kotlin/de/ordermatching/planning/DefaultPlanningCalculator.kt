@@ -137,6 +137,8 @@ class DefaultPlanningCalculator : IPlanningCalculator {
         return tpsInRegion.any { it == node.transferPoint }
     }
 
+//    private fun isInTpSet(node: Node) TODO
+
     private fun isEndInDeliveryRegion(region: Polygon): Boolean {
         val location = input.order.recipientPosition
         val gf = GeometryFactory()

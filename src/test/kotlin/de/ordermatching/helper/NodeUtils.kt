@@ -15,7 +15,7 @@ fun getEndNode(order: Order): Node {
 fun getStartNode(order: Order): Node {
     return Node(
         position = order.senderPosition,
-        transferPoint = TransferPoint(order.senderPosition),
+        transferPoint = TransferPoint(order.senderPosition, id = 0),
         lspOwner = null,
         type = NodeType.NEUTRAL,
         predecessor = null,

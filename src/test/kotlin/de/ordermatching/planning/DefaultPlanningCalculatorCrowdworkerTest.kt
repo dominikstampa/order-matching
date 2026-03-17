@@ -23,8 +23,8 @@ internal class DefaultPlanningCalculatorCrowdworkerTest {
     private lateinit var input: PlanningInput
     private val planner = DefaultPlanningCalculator()
 
-    private val startTp = TransferPoint(testOrder.senderPosition)
-    private val midTp = TransferPoint(GeoPosition(50.0, 7.0))
+    private val startTp = TransferPoint(testOrder.senderPosition, id = 0)
+    private val midTp = TransferPoint(GeoPosition(50.0, 7.0), id = 1)
 
     private val endNode = Node(
         position = testOrder.recipientPosition,

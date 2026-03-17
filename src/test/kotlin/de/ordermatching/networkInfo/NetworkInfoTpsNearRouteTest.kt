@@ -13,8 +13,8 @@ import kotlin.test.assertEquals
 
 class NetworkInfoTpsNearRouteTest : NetworkInfoBaseTest() {
 
-    private val tpWeingarten = TransferPoint(GeoPosition(49.0589, 8.5213))
-    private val tpBruchsalStation = TransferPoint(GeoPosition(49.1250, 8.5908))
+    private val tpWeingarten = TransferPoint(GeoPosition(49.0589, 8.5213), id = 0)
+    private val tpBruchsalStation = TransferPoint(GeoPosition(49.1250, 8.5908), id = 1)
     private val routeStartKA = GeoPosition(
         de.ordermatching.networkInfo.CrowdworkerEntities.cwRouteKAtoBruchsal.route.startPoint.y - 0.0001,
         de.ordermatching.networkInfo.CrowdworkerEntities.cwRouteKAtoBruchsal.route.startPoint.x - 0.0001
@@ -114,7 +114,7 @@ class NetworkInfoTpsNearRouteTest : NetworkInfoBaseTest() {
     @Test
     fun `test performance`() {
         val allTps =
-            (1..100000).map { TransferPoint(getRandomPositionGermany()) }
+            (1..100000).mapIndexed { index, i -> TransferPoint(getRandomPositionGermany(), id = index) }
         every { networkInfo.getAllTransferPoints() } returns allTps
 
         val iterations = 200

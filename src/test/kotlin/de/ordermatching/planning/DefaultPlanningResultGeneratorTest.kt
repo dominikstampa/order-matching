@@ -22,7 +22,7 @@ class DefaultPlanningResultGeneratorTest {
 
     private val resultGenerator = DefaultPlanningResultGenerator()
     private val mockPosition = GeoPosition(0.0, 0.0)
-    private val mockTp = TransferPoint(mockPosition, null)
+    private val mockTp = TransferPoint(mockPosition, null, id = 0)
     private val startTime = OffsetDateTime.of(2023, 11, 21, 8, 0, 0, 0, ZoneOffset.UTC) //Tuesday
     private val endTime = startTime.plusDays(1)
 

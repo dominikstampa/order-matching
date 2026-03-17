@@ -18,11 +18,11 @@ open class NetworkInfoBaseTest {
 
     val gf = GeometryFactory()
 
-    val tpCastleKarlsruhe = TransferPoint(GeoPosition(49.01348477660366, 8.404405466354088))
-    val tpWildparkKarlsruhe = TransferPoint(GeoPosition(49.02002947593384, 8.413030640497615))
-    val tpFZIKarlsruhe = TransferPoint(GeoPosition(49.0118535702568, 8.425350971251904))
-    val tpCampusBruchsal = TransferPoint(GeoPosition(49.1170708967543, 8.58796554246431))
-    val tpFerryConstance = TransferPoint(GeoPosition(47.682353572508745, 9.210618366773664))
+    val tpCastleKarlsruhe = TransferPoint(GeoPosition(49.01348477660366, 8.404405466354088), id = 0)
+    val tpWildparkKarlsruhe = TransferPoint(GeoPosition(49.02002947593384, 8.413030640497615), id = 1)
+    val tpFZIKarlsruhe = TransferPoint(GeoPosition(49.0118535702568, 8.425350971251904), id = 2)
+    val tpCampusBruchsal = TransferPoint(GeoPosition(49.1170708967543, 8.58796554246431), id = 3)
+    val tpFerryConstance = TransferPoint(GeoPosition(47.682353572508745, 9.210618366773664), id = 4)
 
     val allTransferPoints = listOf(
         tpCastleKarlsruhe,

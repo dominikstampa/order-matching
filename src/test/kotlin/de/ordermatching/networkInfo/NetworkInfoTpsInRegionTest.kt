@@ -81,7 +81,7 @@ internal class NetworkInfoTpsInRegionTest : NetworkInfoBaseTest() {
     @Test
     fun `test performance`() {
         val allTps =
-            (1..100000).map { TransferPoint(GeoPosition(Random.nextDouble(47.0, 54.0), Random.nextDouble(6.0, 15.0))) }
+            (1..100000).mapIndexed { index, i -> TransferPoint(GeoPosition(Random.nextDouble(47.0, 54.0), Random.nextDouble(6.0, 15.0)), id = index) }
         networkInfoMock.setAllTpsMock(allTps)
 
         val iterations = 300

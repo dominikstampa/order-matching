@@ -137,7 +137,7 @@ internal class NetworkInfoCwForEdgeTest : NetworkInfoBaseTest() {
         val position = getRandomPositionGermany()
         return Node(
             position = position,
-            transferPoint = TransferPoint(position),
+            transferPoint = TransferPoint(position, id = 0),
             lspOwner = null,
             type = NodeType.NEUTRAL,
             arrivalTime = OffsetDateTime.of(
@@ -157,7 +157,7 @@ internal class NetworkInfoCwForEdgeTest : NetworkInfoBaseTest() {
         val position = getRandomPositionNearPoint(startNode.position)
         return Node(
             position = position,
-            transferPoint = TransferPoint(position),
+            transferPoint = TransferPoint(position, id = 0),
             lspOwner = null,
             type = NodeType.NEUTRAL,
             arrivalTime = startNode.arrivalTime!!.plusHours(Random.nextLong(1, 5))

@@ -2,7 +2,7 @@ package de.ordermatching.model
 
 import java.time.OffsetDateTime
 
-data class Node(
+class Node(
     val position: GeoPosition,
     val transferPoint: TransferPoint?, //null of no transfer point (start/end)
     val lspOwner: LogisticsServiceProvider?, //null if lbn transfer point
@@ -21,5 +21,12 @@ data class Node(
 
     override fun equals(other: Any?): Boolean {
         return other != null && other is Node && other.position == position && other.type == type && other.lspOwner?.name == lspOwner?.name
+    }
+
+    override fun hashCode(): Int {
+        var result = position.hashCode()
+        result = 31 * result + type.hashCode()
+        result = 31 * result + (lspOwner?.name.hashCode() ?: 0)
+        return result
     }
 }

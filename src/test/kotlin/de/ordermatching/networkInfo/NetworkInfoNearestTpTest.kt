@@ -32,7 +32,7 @@ internal class NetworkInfoNearestTpTest : NetworkInfoBaseTest() {
 
     @Test
     fun `test find nearest transfer point with tp has same coordinates`() {
-        val tp = TransferPoint(GeoPosition(latitude = 14.36097778309052, longitude = 4.200735818652469))
+        val tp = TransferPoint(GeoPosition(latitude = 14.36097778309052, longitude = 4.200735818652469), id = 0)
         every { networkInfo.getAllTransferPoints() } returns listOf(tp)
         val tpPosition = tp.position
 
@@ -84,7 +84,7 @@ internal class NetworkInfoNearestTpTest : NetworkInfoBaseTest() {
     @Test
     fun `test performance find nearest transfer points`() {
         val allTps =
-            (1..100000).map { TransferPoint(GeoPosition(Random.nextDouble(47.0, 54.0), Random.nextDouble(6.0, 15.0))) }
+            (1..100000).mapIndexed { index, i -> TransferPoint(GeoPosition(Random.nextDouble(47.0, 54.0), Random.nextDouble(6.0, 15.0)), id = index) }
         every { networkInfo.getAllTransferPoints() } returns allTps
 
         val iterations = 100
