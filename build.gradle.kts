@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.ordermatching"
-version = "0.6.2"
+version = "0.6.3"
 
 repositories {
     maven {
@@ -17,10 +17,11 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:1.13.8")
-    implementation("org.geotools:gt-main:29.1")
+    implementation("org.geotools:gt-main:34.2")
+    implementation("org.geotools:gt-epsg-hsql:34.2") //needed?
     implementation("org.locationtech.jts:jts-core:1.19.0")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("ch.qos.logback:logback-classic:1.5.13")
+    implementation("ch.qos.logback:logback-classic:1.5.32")
 }
 
 tasks.test {
@@ -40,7 +41,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "de.ordermatching"
             artifactId = "order-matching"
-            version = "0.6.2"
+            version = "0.6.3"
 
             from(components["java"])
         }
