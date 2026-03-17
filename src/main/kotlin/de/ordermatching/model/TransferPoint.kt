@@ -9,4 +9,11 @@ data class TransferPoint(
     override fun toString(): String {
         return "Node(position=$position, type=$type, owner=$owner)"
     }
+
+    /*
+    transfer points are equal when same type at exact same position
+     */
+    override fun equals(other: Any?): Boolean {
+        return other != null && other is TransferPoint && other.position == position && other.type == type
+    }
 }
