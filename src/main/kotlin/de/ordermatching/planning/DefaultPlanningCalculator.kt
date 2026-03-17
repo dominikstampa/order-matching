@@ -90,11 +90,11 @@ class DefaultPlanningCalculator : IPlanningCalculator {
     private fun findAndUpdateNodesForParcelService(lsp: LogisticsServiceProvider, node: Node) {
         val regionalTransferPoints =
             input.networkInfo.findTransferPointsInLSPDeliveryRegion(lsp)
-                .filter { it != node.transferPoint }
+                .filter { it != node.transferPoint }.toSet()
         val relevantNodes: MutableList<Node> =
             priorityQueue.filter {
                 relevantDestinationNode(it, lsp)
-                        && isInTpList(it, regionalTransferPoints) //instead check for region?
+                        && isInTpSet(it, regionalTransferPoints) //instead check for region?
             }
                 .toMutableList()
         if (isEndInDeliveryRegion(lsp.deliveryRegion)) {
@@ -137,7 +137,10 @@ class DefaultPlanningCalculator : IPlanningCalculator {
         return tpsInRegion.any { it == node.transferPoint }
     }
 
-//    private fun isInTpSet(node: Node) TODO
+    //probably a bit faster than list and any
+    private fun isInTpSet(node: Node, tpsInRegion: Set<TransferPoint>): Boolean {
+        return tpsInRegion.contains(node.transferPoint)
+    }
 
     private fun isEndInDeliveryRegion(region: Polygon): Boolean {
         val location = input.order.recipientPosition
@@ -236,11 +239,11 @@ class DefaultPlanningCalculator : IPlanningCalculator {
         val transferPoints = input.networkInfo.findTransferPointsNearCWRouteBetweenPackageAndEndpoint(
             routeTimeslot.route,
             node.position
-        )
+        ).toSet()
         val relevantNodes =
             input.allNodes.filter {
                 (it.type == NodeType.NEUTRAL || it.type == NodeType.OUT)
-                        && isInTpList(it, transferPoints)
+                        && isInTpSet(it, transferPoints)
                         && it.transferPoint != node.transferPoint
             }
         updateNodesFromCwRoutes(relevantNodes, routeTimeslot, node)
