@@ -10,6 +10,7 @@ import org.locationtech.jts.geom.Coordinate
 import org.locationtech.jts.geom.GeometryFactory
 import kotlin.random.Random
 import kotlin.system.measureNanoTime
+import kotlin.test.Ignore
 import kotlin.test.assertEquals
 
 internal class NetworkInfoTpsInRegionTest : NetworkInfoBaseTest() {
@@ -76,7 +77,7 @@ internal class NetworkInfoTpsInRegionTest : NetworkInfoBaseTest() {
         assert(result.isNotEmpty())
     }
 
-    //    @Ignore
+    @Ignore
     @Test
     fun `test performance`() {
         val allTps =

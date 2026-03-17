@@ -18,4 +18,8 @@ data class Node(
     override fun toString(): String {
         return "Node(position=$position, type=$type, transferPoint=$transferPoint)"
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other != null && other is Node && other.position == position && other.type == type && other.lspOwner?.name == lspOwner?.name
+    }
 }

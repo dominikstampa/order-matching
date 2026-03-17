@@ -91,7 +91,7 @@ abstract class AbstractNetworkInfo : INetworkInfo {
         val possibleDays = getNextNDays(time, daysInAdvance)
         val point = GeometryFactory().createPoint(Coordinate(position.longitude, position.latitude))
         val allCrowdworker = getAllCrowdworker()
-        val nearRouteTimeslots = allCrowdworker.map { it.routes }.flatten()
+        val nearRouteTimeslots = allCrowdworker.flatMap { it.routes }
             .filter {
                 GeoUtils.calculateApproxDistanceBetweenLineStringAndPointInMeters(
                     it.route,
