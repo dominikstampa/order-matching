@@ -46,7 +46,6 @@ interface DistanceProperty {
         price: Double,
         lsp: LogisticsServiceProvider?
     ) {
-        require(arrivalTime.hour != 0 || arrivalTime.minute != 0)
         if (needsUpdate(from, to, arrivalTime, emissions, price) && !isLongDistanceViolation(from, to)) {
             val estimatedEmissions = estimateEmissions(from.position, to.position, emissions)
             to.arrivalTime = arrivalTime.withOffsetSameInstant(ZoneOffset.UTC)

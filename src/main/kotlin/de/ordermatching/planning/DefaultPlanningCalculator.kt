@@ -264,7 +264,7 @@ class DefaultPlanningCalculator : IPlanningCalculator {
                     routeTimeslot.timeslot.closeTime //only timeslot as parameter
                 ),
                 0.0, //can cw emissions be seen as 0? or depending on means of transport
-                input.config.cwPriceEstimator.getPrice(start, it, routeTimeslot), //Replace with some estimate depending on route length ...
+                input.config.cwPriceEstimator.getPrice(start, it, routeTimeslot),
                 null
             )
             //update node in priority queue (probably the best way in kotlin)

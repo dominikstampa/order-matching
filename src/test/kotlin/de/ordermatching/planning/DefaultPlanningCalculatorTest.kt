@@ -20,6 +20,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.locationtech.jts.geom.Coordinate
 import org.locationtech.jts.geom.GeometryFactory
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import kotlin.test.assertEquals
 
 internal open class DefaultPlanningCalculatorTest {
@@ -97,6 +99,65 @@ internal open class DefaultPlanningCalculatorTest {
         assert(endNode.arrivalTime != null)
         assertEquals(serviceInfo.deliveryDateEstimate, endNode.arrivalTime)
     }
+
+    @Test
+    fun `test calculate shortest path with midnight arrival time`() {
+        val order = Order(
+            senderPosition = mockTp.position,
+            recipientPosition = GeoPosition(50.93853, 6.98288),
+            packageSize = PackageSize.SMALL,
+            startTime = OffsetDateTime.of(2023, 11, 21, 22, 0, 0, 0, ZoneOffset.UTC) //Tuesday
+        )
+        val lsp = LogisticsServiceProvider(
+            name = "Lsp",
+            externalInteraction = true,
+            deliveryRegion = testLsp.deliveryRegion
+        )
+        val serviceInfo = ServiceInfo(
+            priceEstimate = 1.0,
+            deliveryDateEstimate = order.startTime.plusHours(1),
+            emissionsEstimate = 2.0
+        )
+        val serviceInfoLate = ServiceInfo(
+            priceEstimate = 1.0,
+            deliveryDateEstimate = order.startTime.plusHours(2),
+            emissionsEstimate = 2.0
+        )
+        val startNode = Node(
+            position = mockTp.position,
+            transferPoint = mockTp,
+            lspOwner = null,
+            type = NodeType.NEUTRAL,
+            predecessor = null,
+            lspToNode = null,
+            arrivalTime = order.startTime,
+            emissions = 0.0,
+            price = 0.0
+        )
+        val midTp = TransferPoint(GeoPosition(50.0, 10.0), id = 1)
+        val midNode = Node(
+            position = midTp.position,
+            transferPoint = midTp,
+            lspOwner = null,
+            type = NodeType.NEUTRAL
+        )
+        val endNode = getEndNode(order)
+
+        every { networkInfo.findLSPsWithPositionInDeliveryRegion(any()) } returns listOf(lsp)
+        every { networkInfo.findTransferPointsInLSPDeliveryRegion(any()) } returns listOf(mockTp, midTp)
+        every { networkInfo.findSuitedCWRoutesNearPosition(any(), any()) } returns emptyList()
+        every { networkInfo.getServiceInfo(lsp, order.startTime, testOrder.packageSize, any(), any()) } returns serviceInfo
+        every { networkInfo.getServiceInfo(lsp, order.startTime.plusHours(1), testOrder.packageSize, any(), any()) } returns serviceInfoLate
+
+        val input = PlanningInput(endNode, listOf(startNode, midNode), TimeProperty(), networkInfo, testOrder, Configuration())
+        calculator.calculate(input)
+
+        assert(endNode.emissions != null)
+        assert(endNode.price != null)
+        assert(endNode.arrivalTime != null)
+        assertEquals(OffsetDateTime.of(2023, 11, 21, 23, 0, 0, 0, ZoneOffset.UTC), endNode.arrivalTime)
+    }
+
 
     @Nested
     inner class OpeningTimesTest {
